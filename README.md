@@ -3,7 +3,7 @@ PipeIT2 is a somatic variant calling workflow for Ion Torrent sequencing. PipeIT
 
 The PipeIT2 Singularity image was built on a CentOS7 Docker image and requires a working Singularity installation (https://sylabs.io/docs/, see Note 1).
 
-<img src="https://github.com/ckynlab/PipeIT2/blob/master/images/PipeIT2_schema_v2.0.0.png" align="left" width="1000" >
+<img src="https://github.com/ckynlab/PipeIT2/blob/master/PipeIT2_schema_v2.0.0.png" align="left" width="1000" >
 
 ## Tumor-germline workflow
 The tumor-germline workflow performs somatic variant calling using the sequencing data of a cancer sample together with its matched germline sample. The workflow consists of the following steps:
@@ -26,30 +26,30 @@ The tumor-only workflow consists of the following steps:
 ## Executing PipeIT
 PipeIT can be executed as follows:
 ```
-singularity run PipeIT2_<version>.img [options]
+singularity run PipeIT_<version>.img [options]
 ```
 
 The complete list of parameters can be displayed using the following command:
 ```
-singularity run PipeIT2_<version>.img --help
+singularity run PipeIT_<version>.img --help
 ```
 
 The PipeIT version can be printed on screen using the following command:
 ```
-singularity run PipeIT2_<version>.img --version
+singularity run PipeIT_<version>.img --version
 ```
 
 ## Input files
 The basic command needed to perform the tumor-germline workflow is:
 ```
-singularity run PipeIT2_<version>.img -t path/to/tumor.bam -n path/to/normal.bam -e path/to/region.bed 
+singularity run PipeIT_<version>.img -t path/to/tumor.bam -n path/to/normal.bam -e path/to/region.bed 
 ```
 
 The mandatory input files for the matched tumor-germline pipeline are the tumor and the normal BAM files (the `-t` and `-n` parameters, respectively), and the BED file of the targeted regions (the `-e` parameter). Paths to input files must be relative paths (see Note 4).
 
 The basic command needed to perform the tumor-only workflow is:
 ```
-singularity run PipeIT2_<version>.img -t path/to/tumor.bam -e path/to/region.bed -c path/to/annovar/humandb/folder
+singularity run PipeIT_<version>.img -t path/to/tumor.bam -e path/to/region.bed -c path/to/annovar/humandb/folder
 ```
 
 The mandatory input files for the tumor-only pipeline are the tumor BAM file (the `-t` parameter) and the BED file of the targeted regions (the `-e` parameter). The path to ANNOVAR population databases (the `-c` parameter) is also required for variant filtering. Paths to input files must be relative paths (see Note 4).
@@ -138,7 +138,7 @@ The final output is a VCF file of the variants (<output>.PipeIT.vcf). Tables bel
 
 4. Because of the way Singularity treats relative and absolute paths, paths to input files have to be relative paths. Relative paths will appear to PipeIT2 as files defined outside of the container, while fully qualified paths refer to files inside the container. Depending on the high performance computing environment, it may be necessary to mount additional files and paths. By default, Singularity automatically mounts certain directories such as the user's home directory, /tmp, /proc, /sys, and /dev inside the container. If the input files are located outside of these mounted directories, the paths of the input files must be specified by using the -B flag. For example, if the BAM and BED files are stored in `/myHPC/a/different/folder/`:
 ```
-singularity run -B /myHPC/a/different/folder/ PipeIT2_<version>.img -t path/to/tumor.bam -n path/to/normal.bam -e path/to/region.bed
+singularity run -B /myHPC/a/different/folder/ PipeIT_<version>.img -t path/to/tumor.bam -n path/to/normal.bam -e path/to/region.bed
 ```
 Further information can be found in the Singularity official documentation (https://sylabs.io/docs/).
 
@@ -146,10 +146,10 @@ Further information can be found in the Singularity official documentation (http
 
 6. The ANNOVAR population databases required for the tumor-only workflow are large and therefore not included in the PipeIT2 Singularity image. We have provided a script in PipeIT2 to facilitate the automatic downloading of the databases. The following commands will execute the downloads:
 ```
-singularity exec PipeIT2_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 esp6500siv2_all humandb/
-singularity exec PipeIT2_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 1000g2015aug humandb/
-singularity exec PipeIT2_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 exac03 humandb/
-singularity exec PipeIT2_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 gnomad_genome humandb/
+singularity exec PipeIT_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 esp6500siv2_all humandb/
+singularity exec PipeIT_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 1000g2015aug humandb/
+singularity exec PipeIT_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 exac03 humandb/
+singularity exec PipeIT_<version>.img annotate_variation.pl -downdb -webfrom annovar -buildver hg19 gnomad_genome humandb/
 ```
 
 7. The unmerged bed can be manually created using the `tvcutils validate_bed --unmerged-detail-bed` option from the Torrent Suite (https://github.com/iontorrent/TS) by providing it with the BED file of the target regions.
