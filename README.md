@@ -3,7 +3,7 @@ PipeIT2 is a somatic variant calling workflow for Ion Torrent sequencing. PipeIT
 
 The PipeIT2 Singularity image was built on a CentOS7 Docker image and requires a working Singularity installation (https://sylabs.io/docs/, see Note 1).
 
-<img src="https://github.com/ckynlab/PipeIT2/blob/master/PipeIT2_schema_v2.0.0.png" align="left" width="1000" >
+<img src="https://github.com/ckynlab/PipeIT2/blob/main/PipeIT2_schema_v2.0.0.png" align="left" width="1000" >
 
 ## Tumor-germline workflow
 The tumor-germline workflow performs somatic variant calling using the sequencing data of a cancer sample together with its matched germline sample. The workflow consists of the following steps:
