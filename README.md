@@ -84,10 +84,10 @@ Optional parameters to customize filtering:
 -r, --min_normal_depth <n> (tumor-germline workflow only): The minimum read depth for the normal sample. The default is 10.
 -f, --min_TN_VAF_ratio <n> (tumor-germline workflow only): The minimum VAF ratio between tumor and normal samples. The default is 10.
 -g, --min_allele_fraction <n> (tumor-only workflow only): The minimum VAF in the tumor sample. The default is 0.1.
--d, --pon <path> (tumor-only workflow only): This parameter can either point to a VCF file containing variants from a panel of normal samples (PoN), or to a .txt file containing the paths to BAM files of a panel of normal samples, one per line. If the .txt file is provided, PipeIT will generate the PoN VCF file used for the analysis (see Note 9). 
+-d, --pon <path> (tumor-only workflow only): This parameter can either point to a VCF file containing variants from a panel of normal samples (PoN), or to a .txt file containing the paths to BAM files of a panel of normal samples, one per line. If the .txt file is provided, PipeIT2 will generate the PoN VCF file used for the analysis (see Note 9). 
 -b, --homopolymer_run <n> (tumor-only workflow only): The maximum homopolymer length accepted. Variants in homopolymer regions exceeding this length will be filtered out. The value 0 will disable this filter. The default is 4.
 -k, --max_pop_af <n> (tumor-only workflow only): The maximum minor allele frequency of the variant in population databases. The default is 0.005.
--y, --non_coding <true/false>: Whether PipeIT2 should report non-coding variants in the final output. The default is false. 
+-y, --non_coding <true/false>: Whether PipeIT2 should report non-coding variants in the final output. The default is false. Note: non-coding hotspot mutations are always reported.
 ```
 
 ## Output file
