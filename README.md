@@ -78,8 +78,8 @@ Optional parameters:
 
 Optional parameters to customize filtering:
 ```
--q, --quality <n>: The minimum quality score of the variant. The default is 0.
--s, --min_supporting_reads <n>: The minimal number of reads supporting the variant,  used for filtering. The default is 8.
+-q, --quality <n>: The minimum quality score of the variant. The default is 15.
+-s, --min_supporting_reads <n>: The minimal number of reads supporting the variant, used for filtering. The default is 8.
 -m, --min_tumor_depth <n>: The minimum read depth for the tumor sample. The default is 10 for the tumor-germline workflow and 20 for the tumor-only workflow.
 -r, --min_normal_depth <n> (tumor-germline workflow only): The minimum read depth for the normal sample. The default is 10.
 -f, --min_TN_VAF_ratio <n> (tumor-germline workflow only): The minimum VAF ratio between tumor and normal samples. The default is 10.
@@ -159,6 +159,9 @@ singularity exec PipeIT_<version>.img annotate_variation.pl -downdb -webfrom ann
 9. Variants derived from a panel of normal samples (PoN) sequenced using the same sequencing assay can be useful for the filtering of likely germline variants and recurrent sequencing and alignment artefacts. A PoN VCF file can be directly used by PipeIT2 to remove variants present in the file. If a list of BAM files is given, PipeIT2 will call variants as per the variant calling and the post-processing of multiallelic variants steps in the tumor-only workflow and merge the variants from these files into a single PoN VCF to be used for filtering.
 
 10. TVC provides two types of allele counts: the conventional allele counts and the flow evaluator allele counts. In general, we compute VAF using the flow evaluator allele counts (FAO and FRO), except when they are not reported by TVC, in which case we compute VAF using the conventional allele counts (AO and RO). FAO and FRO are usually equal to AO and RO, respectively, but may also differ due to complex alleles and/or downsampling. FDP and DP are not used for the calculation of VAF.
+
+## Software availability
+PipeIT2 can be downloaded from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6123937.svg)](https://doi.org/10.5281/zenodo.6123937).
 
 ## Citation
 If you use PipeIT, please cite Garofoli et al, *PipeIT: A Singularity Container for Molecular Diagnostic Somatic Variant Calling on the Ion Torrent Next-Generation Sequencing Platform* [DOI: 10.1016/j.jmoldx.2019.05.001](https://doi.org/10.1016/j.jmoldx.2019.05.001). 
